@@ -1,9 +1,9 @@
-
+import Landing from './components/Landing'
 
 function App() {
   return (
     <div >
-      <p>Hello tic tac toe</p>
+      <Landing />
     </div>
   );
 }
