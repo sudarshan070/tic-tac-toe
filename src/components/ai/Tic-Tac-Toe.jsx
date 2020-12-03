@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Square from "../Square";
 import { getRandomInt, switchPlayer } from "./Utils";
 
@@ -10,29 +10,46 @@ export default function TicTacToe() {
     ai: null,
   });
   const [gameState, setGameState] = useState("notStarted");
+  const [nextMove, setNextMove] = useState(null);
 
-  const move = (index, player) => {
-    setSquares((squares) => {
-      const squaresCopy = squares.concat();
-      squaresCopy[index] = player;
-      return squaresCopy;
-    });
-  };
+  const move = useCallback(
+    (index, player) => {
+      if (player && gameState === "inProgress") {
+        setSquares((squares) => {
+          const squaresCopy = squares.concat();
+          squaresCopy[index] = player;
+          return squaresCopy;
+        });
+      }
+    },
+    [gameState]
+  );
 
-  const aiMove = () => {
+  const aiMove = useCallback(() => {
     let index = getRandomInt(0, 8);
     while (squares[index]) {
       index = getRandomInt(0, 8);
     }
     move(index, players.ai);
-  };
+    setNextMove(players.human);
+  }, [move, squares, players]);
 
   const humanMove = (index) => {
-    if (!squares[index]) {
+    if (!squares[index] && nextMove === players.human) {
       move(index, players.human);
-      aiMove();
+      setNextMove(players.ai);
     }
   };
+
+  useEffect(() => {
+    let timeout;
+    if (nextMove !== null && nextMove === players.ai && gameState !== "over") {
+      timeout = setTimeout(() => {
+        aiMove();
+      }, 500);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [nextMove, players.ai, aiMove, gameState]);
 
   const renderSquare = (index) => {
     return <Square value={squares[index]} onClick={() => humanMove(index)} />;
@@ -41,6 +58,7 @@ export default function TicTacToe() {
   const chosePlayer = (player) => {
     setPlayers({ human: player, ai: switchPlayer(player) });
     setGameState("inProgress");
+    setNextMove(1);
   };
 
   return (
