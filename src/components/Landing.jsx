@@ -1,10 +1,12 @@
 import React from "react";
-import Game from "./Game";
+import TicTacToe from "./ai/Tic-Tac-Toe";
+// import Game from "./Game";
 
 export default function Landing() {
   return (
     <div>
-      <Game />
+      {/* <Game /> */}
+      <TicTacToe />
     </div>
   );
 }
