@@ -1,32 +1,32 @@
-import Board from "../Board";
-import { DRAW } from "./Constant";
-import { minmax } from "./minmax";
+import { DIMS, DRAW } from "../Constant";
 
-export default class AiBoard {
-  constructor(squares) {
-    this.squares = squares || Array(9).fill(null);
+export default class Board {
+  constructor(grid) {
+    this.grid = grid || new Array(DIMS ** 2).fill(null);
+    this.winningIndex = null;
   }
 
   makeMove = (square, player) => {
-    if (this.squares[square] === null) {
-      this.squares[square] = player;
+    if (this.grid[square] === null) {
+      this.grid[square] = player;
     }
   };
 
-  getEmptySquare = (squares = this.squares) => {
-    let allSquares = [];
-    squares.forEach((square, i) => {
-      if (square === null) allSquares.push();
+ 
+  getEmptySquares = (grid = this.grid) => {
+    let squares = [];
+    grid.forEach((square, i) => {
+      if (square === null) squares.push(i);
     });
-    return allSquares;
+    return squares;
   };
 
-  isEmpty = (squares = this.squares) => {
-    return this.getEmptySquare(squares).length === 9;
+  isEmpty = (grid = this.grid) => {
+    return this.getEmptySquares(grid).length === DIMS ** 2;
   };
 
-  getWinner = (squares = this.squares) => {
-    const lines = [
+  getWinner = (grid = this.grid) => {
+    const winningCombos = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -36,22 +36,20 @@ export default class AiBoard {
       [0, 4, 8],
       [2, 4, 6],
     ];
-
     let res = null;
-    lines.forEach((e, i) => {
+    winningCombos.forEach((el, i) => {
       if (
-        squares[e[0]] !== null &&
-        squares[e[0]] === squares[e[1]] &&
-        squares[e[0]] === squares[e[2]]
+        grid[el[0]] !== null &&
+        grid[el[0]] === grid[el[1]] &&
+        grid[el[0]] === grid[el[2]]
       ) {
-        res = squares[e[0]];
-      } else if (res === null && this.getEmptySquare(squares).length === 0) {
+        res = grid[el[0]];
+        this.winningIndex = i;
+      } else if (res === null && this.getEmptySquares(grid).length === 0) {
         res = DRAW;
+        this.winningIndex = null;
       }
     });
     return res;
-  };
-  clone = () => {
-    return new Board(this.squares.concat());
   };
 }

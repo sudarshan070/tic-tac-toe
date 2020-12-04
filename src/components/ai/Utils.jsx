@@ -1,4 +1,4 @@
-import { PLAYER_O, PLAYER_X } from "./Constant";
+import { PLAYER_O, PLAYER_X } from "../Constant";
 
 export const getRandomInt = (min, max) => {
   min = Math.ceil(min);

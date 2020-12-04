@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Square from "../Square";
+import Square from "./Square";
 import AiBoard from "./AiBoard";
-import { DRAW, GAME_STATES, PLAYER_O, PLAYER_X } from "./Constant";
+import { DRAW, GAME_STATES, PLAYER_O, PLAYER_X } from "../Constant";
 import { getRandomInt, switchPlayer } from "./Utils";
 
 const board = new AiBoard();
-console.log(board);
 const initialSquare = Array(9).fill(null);
 
 export default function TicTacToe() {

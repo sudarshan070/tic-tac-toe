@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Square from "./Square";
+import Square from "./Board";
 
 export default function Board() {
   const initialSquare = Array(9).fill(null);
@@ -48,7 +48,6 @@ export default function Board() {
 }
 
 // winner helper function
-
 function winnerHelper(squares) {
   const lines = [
     [0, 1, 2],
