@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Square from "./Square";
+import { NavLink } from "react-router-dom";
+import Square from "./Board";
 
 export default function Board() {
   const initialSquare = Array(9).fill(null);
@@ -26,8 +27,8 @@ export default function Board() {
     : `Next player: ${xIsNext ? "X" : "O"}`;
 
   return (
-    <div>
-      <div>{status}</div>
+    <div className="height flex-column d-flex justify-content-center align-items-center">
+      <div className="title">{status}</div>
       <div className="row">
         {renderSquare(0)}
         {renderSquare(1)}
@@ -43,12 +44,14 @@ export default function Board() {
         {renderSquare(7)}
         {renderSquare(8)}
       </div>
+      <NavLink style={{ textDecoration: "none" }} className="home-btn" to="/">
+        Home
+      </NavLink>
     </div>
   );
 }
 
 // winner helper function
-
 function winnerHelper(squares) {
   const lines = [
     [0, 1, 2],
