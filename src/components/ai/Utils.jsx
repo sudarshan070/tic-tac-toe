@@ -1,3 +1,5 @@
+import { PLAYER_O, PLAYER_X } from "./Constant";
+
 export const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -5,5 +7,5 @@ export const getRandomInt = (min, max) => {
 };
 
 export const switchPlayer = (player) => {
-  return player === 1 ? 2 : 1;
+  return player === PLAYER_X ? PLAYER_O : PLAYER_X;
 };
