@@ -3,6 +3,7 @@ import Square from "./Square";
 import AiBoard from "./AiBoard";
 import { DRAW, GAME_STATES, PLAYER_O, PLAYER_X } from "../Constant";
 import { getRandomInt, switchPlayer } from "./Utils";
+import { NavLink } from "react-router-dom";
 
 const board = new AiBoard();
 const initialSquare = Array(9).fill(null);
@@ -101,18 +102,35 @@ export default function TicTacToe() {
     case GAME_STATES.notStarted:
     default:
       return (
-        <div>
-          <h2>Chose Your player</h2>
+        <div className="height flex-column d-flex justify-content-center align-items-center">
+          <h2 className="title">Chose Your player</h2>
           <div>
-            <button onClick={() => chosePlayer(1)}>X</button>
-            <button onClick={() => chosePlayer(2)}>O</button>
+            <button
+              className="btn btn-primary mr-2 player-btn"
+              onClick={() => chosePlayer(1)}
+            >
+              X
+            </button>
+            <button
+              className="btn btn-outline-secondary ml-2 player-btn"
+              onClick={() => chosePlayer(2)}
+            >
+              O
+            </button>
           </div>
+          <NavLink
+            style={{ textDecoration: "none" }}
+            className="home-btn"
+            to="/"
+          >
+            Home
+          </NavLink>
         </div>
       );
 
     case GAME_STATES.inProgress:
       return (
-        <div>
+        <div className="height flex-column d-flex justify-content-center align-items-center">
           {console.log(squares, "squares")}
           <div className="row">
             {renderSquare(0)}
@@ -134,9 +152,11 @@ export default function TicTacToe() {
 
     case GAME_STATES.over:
       return (
-        <div>
-          <p>{winner}</p>
-          <button onClick={startNewGame}> start over </button>
+        <div className="height flex-column d-flex justify-content-center align-items-center">
+          <p className="title text-primary">{winner}</p>
+          <button className="home-btn " onClick={startNewGame}>
+            start over
+          </button>
         </div>
       );
   }

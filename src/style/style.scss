@@ -13,8 +13,58 @@ body {
 }
 
 .square {
-  height: 32px;
-  width: 32px;
-  margin: 3px;
+  height: 90px;
+  width: 90px;
+  margin: 4px;
   line-height: 32px;
+  background: #ffffff;
+  font-size: 32px;
+  outline: none;
+  border: none;
+}
+
+.height {
+  height: 100vh;
+}
+.title {
+  font-size: 2rem;
+  padding-bottom: 2rem;
+  font-weight: 300;
+  color: #8b8b8b;
+}
+
+.landing-btn {
+  width: 200px;
+  text-align: center;
+  border: 1px solid #8b8b8b;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  color: #8b8b8b;
+  padding: 0.8rem 1.2rem;
+
+  &:hover {
+    color: #050505;
+    border: 1px solid #050505;
+  }
+}
+
+.home-btn {
+  border: 1px solid #050505;
+  color: #050505;
+  padding: 0.6rem 1.6rem;
+  width: 150px;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  &:hover {
+    color: #8b8b8b;
+    border: 1px solid #8b8b8b;
+  }
+}
+
+.player-btn {
+  width: 70px;
+  font-size: 1.25rem;
 }
