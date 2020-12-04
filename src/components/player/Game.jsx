@@ -44,7 +44,7 @@ export default function Board() {
         {renderSquare(7)}
         {renderSquare(8)}
       </div>
-      <NavLink className="home-btn" to="/">
+      <NavLink style={{ textDecoration: "none" }} className="home-btn" to="/">
         Home
       </NavLink>
     </div>

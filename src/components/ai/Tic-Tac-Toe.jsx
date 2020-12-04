@@ -97,7 +97,6 @@ export default function TicTacToe() {
     setSquares(initialSquare);
   };
 
-  console.log(gameState, "gameState");
   switch (gameState) {
     case GAME_STATES.notStarted:
     default:
@@ -131,7 +130,6 @@ export default function TicTacToe() {
     case GAME_STATES.inProgress:
       return (
         <div className="height flex-column d-flex justify-content-center align-items-center">
-          {console.log(squares, "squares")}
           <div className="row">
             {renderSquare(0)}
             {renderSquare(1)}
